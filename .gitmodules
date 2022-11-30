@@ -1,0 +1,6 @@
+[submodule "lib/c_library_v2"]
+	path = lib/c_library_v2
+	url = git@github.com:mavlink/c_library_v2.git
+[submodule "lib/ArduinoStreaming"]
+	path = lib/ArduinoStreaming
+	url = git@github.com:geneReeves/ArduinoStreaming.git

@@ -1,0 +1,89 @@
+# TIMU - Tele Inertial Measurement Unit [IN DEV]
+## Firmware
+This system is capable of collecting telemetry data from a Pixhawk, save them on board with a removable SD CARD and to transmit them to the ground station. The ground station is capable of display this values in real time.
+
+## MavLink subs
+
+ - Altitude (10 Hz)
+   - `altitude_monotic`
+   - `altitude_amsl`
+   - `altitude_local`
+   - `altitude_relative`
+   - `altitude_terrain`
+   - `bottom_clearance`
+ - Attitude (50 Hz)
+   - `roll`
+   - `pitch`
+   - `yaw`
+   - `rollspeed`
+   - `pitchspeed`
+   - `yawspeed`
+ - Attitude Quaternion (50 Hz)
+   - `q1`
+   - `q2`
+   - `q3`
+   - `q4`
+   - `rollspeed`
+   - `pitchspeed`
+   - `yawspeed`
+   - `repr_offset_q`
+ - Battery Status (<1 Hz)
+   - `id`
+   - `battery_function`
+   - `type`
+   - `temperature`
+   - `voltages`
+   - `current_battery`
+   - `current_consumed`
+   - `energy_consumed`
+   - `battery_remaining`
+   - `time_remaining`
+   - `charge_state`
+   - `volatges_ext`
+   - `mode`
+   - `fault_bitmask`
+ - Estimator Status (5 Hz)
+   - `vel_ratio`
+   - `pos_horiz_ratio`
+   - `pos_vert_ratio`
+   - `mag_ratio`
+   - `hagl_ratio`
+   - `tas_ratio`
+   - `pos_horiz_accuracy`
+   - `pos_vert_accuracy`
+ - Highres IMU (50 Hz)
+   - `xacc`
+   - `yacc`
+   - `zacc`
+   - `xgyro`
+   - `ygyro`
+   - `zgyro`
+   - `xmag`
+   - `ymag`
+   - `zmag`
+   - `abs_pressure`
+   - `diff_pressure`
+   - `pressure_alt`
+   - `temperature`
+ - Odometry (30 Hz)
+   - `x`
+   - `y`
+   - `z`
+   - `q`
+   - `vx`
+   - `vy`
+   - `vz`
+   - `rollspeed`
+   - `pitchspeed`
+   - `yawspeed`
+   - `pose_covariance`
+   - `velocity_covariance`
+ - Vibration (<3 Hz)
+   - `vibration_x`
+   - `vibration_y`
+   - `vibration_z`
+   - `clipping_0`
+   - `clipping_1`
+   - `clipping_2`
+
+
