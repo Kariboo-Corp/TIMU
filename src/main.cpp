@@ -4,10 +4,14 @@
 #include <SPI.h>
 #include <SD.h>
 
+#define VERSION "0.0.1"
+
+#include "HighSpeedLogger.h"
 #include "linker.h"
 #include "autopilot_interface.h"
 
-Linker linker(921600);
+HighSpeedLogger logger(new SDClass(SD));
+Linker linker(logger);
 Autopilot_Interface pixhawk(&linker);
 
 void setup() {
@@ -16,7 +20,9 @@ void setup() {
 
   delay(1000);
 
-  SerialUSB << "Hello, World" << endl;
+  linker.logger.begin(SDCARD_SS_PIN);
+
+  SerialUSB << "TIMU - " << VERSION << endl;
 }
 
 Mavlink_Messages messages;

@@ -2,23 +2,17 @@
 #define LINKER_H
 
 #include <Arduino.h>
-// #include <standard/mavlink.h>
-// #include <ardupilotmega/mavlink.h>
 #include <common/mavlink.h>
-// #include <cubepilot/mavlink.h>
-// #include <development/mavlink.h>
-// #include <icarous/mavlink.h>
-// #include <matrixpilot/mavlink.h>
-// #include <minimal/mavlink.h>
-// #include <test/mavlink.h>
-// #include <uAvionix/mavlink.h>
 #include <Streaming.h>
+#include <SPI.h>
+#include <SD.h>
+
+#include "HighSpeedLogger.h"
 
 class Linker
 {
     public:
-        Linker();
-        Linker(int baudrate);
+        Linker(HighSpeedLogger __logger);
         virtual ~Linker();
 
         int read_message(mavlink_message_t &message);
@@ -27,6 +21,8 @@ class Linker
         bool is_running() {
             return is_open;
         }
+
+        HighSpeedLogger logger;
 
         void stop();
     

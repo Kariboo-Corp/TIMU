@@ -1,20 +1,17 @@
 #include "linker.h"
 
-Linker::Linker()
-{
-    this->is_open = true;
-}
-
-Linker::Linker(int baudrate)
+Linker::Linker(HighSpeedLogger __logger)
 {
     this->baudrate = baudrate;
     this->is_open = true;
+
+    this->logger = __logger;
+    this->logger.open(millis() + ".klog");
 }
 
 Linker::~Linker() 
 {
-    Serial1.begin(this->baudrate);
-    this->is_open = true;
+    ;
 }
 
 int Linker::read_message(mavlink_message_t &message) 
@@ -27,7 +24,7 @@ int Linker::read_message(mavlink_message_t &message)
     {
         cp = Serial1.read();
 
-        if (1 > 0)
+        if (1 > 0) // Specific arduino tric to force message reading.
         {
             msgReceived = mavlink_parse_char(MAVLINK_COMM_0, cp, &message, &status);
 
@@ -40,6 +37,11 @@ int Linker::read_message(mavlink_message_t &message)
         } else 
         {
             SerialUSB << "ERROR: Coulnd't read from port" << endl;
+        }
+
+        if (msgReceived && logger.is_logging)
+        {
+            logger.write(message);
         }
 
         if(msgReceived && debug)
@@ -75,6 +77,7 @@ int Linker::read_message(mavlink_message_t &message)
         return msgReceived;
     }
     
+    return -1;
 }
 
 int Linker::write_message(const mavlink_message_t &message)
@@ -90,4 +93,6 @@ int Linker::write_message(const mavlink_message_t &message)
 void Linker::stop()
 {
     Serial1.end();
+    this->logger.close();
+    this->logger.end();
 }
