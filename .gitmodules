@@ -4,3 +4,6 @@
 [submodule "lib/ArduinoStreaming"]
 	path = lib/ArduinoStreaming
 	url = git@github.com:geneReeves/ArduinoStreaming.git
+[submodule "lib/SD"]
+	path = lib/SD
+	url = git@github.com:arduino-libraries/SD.git

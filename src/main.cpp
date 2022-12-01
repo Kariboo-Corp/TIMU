@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <common/mavlink.h>
 #include <Streaming.h>
+#include <SPI.h>
+#include <SD.h>
 
 #include "linker.h"
 #include "autopilot_interface.h"
