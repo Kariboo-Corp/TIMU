@@ -29,13 +29,5 @@ Mavlink_Messages messages;
 mavlink_attitude_t attitude;
 
 void loop() {
-
   pixhawk.read_messages();
-
-  messages = pixhawk.current_messages;
-	attitude = messages.attitude;
-
-	SerialUSB << ("    ap time:     ") << attitude.time_boot_ms << endl;
-  SerialUSB << ("pitch : ") << _FLOAT(attitude.pitch, 32) << ", roll : " << _FLOAT(attitude.roll, 32) << ", yaw : " << _FLOAT(attitude.yaw, 32) << endl;
-
 }

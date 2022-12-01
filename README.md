@@ -1,8 +1,40 @@
 # TIMU - Tele Inertial Measurement Unit [IN DEV]
+
+## TODO
+ - [firmware] Test SDCARD logging system;
+ - [hardware] Put a button to start/stop log recording;
+
 ## Firmware
 This system is capable of collecting telemetry data from a Pixhawk, save them on board with a removable SD CARD and to transmit them to the ground station. The ground station is capable of display this values in real time.
 
-## MavLink subs
+### Hardware
+
+This code is ment to be used with an Arduino MKR ZERO (ATSAMD21) with a cube orange pixhawk connected to hardware serial 1 and an SDCARD plugged in the Arduino's slot. 
+
+You could configure with messages or group of messages you want to send within the MAVLink menu of QGC:
+* [MAV_1_CONFIG](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_CONFIG) = `TELEM 2`
+* [MAV_1_MODE](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_MODE) = `Normal`
+* [MAV_1_RATE](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_RATE)= `92160` baud (Should be SER_TEL2_BAUD / 10) ie. `SER_TEL2_BAUD = 921600` bps
+* [MAV_1_FORWARD](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_FORWARD) = `True`
+
+MAV_1_MODE could be change to change group of messages you want to send through TELEM2, in our case.
+
+**Comment:** The MAVLink Mode defines the set of streamed messages (for example the vehicle's attitude) and their sending rates.
+
+**Values:**
+
+* **0:** Normal: Standard set of messages for a GCS.
+* **1:** Custom: Nothing (in the default PX4 implementation). These might be used for testing when developing a new mode.
+* **2:** Onboard: Standard set of messages for a companion computer.
+* **3:** OSD: Standard set of messages for an OSD system.
+* **4:** Magic: Nothing (in the default PX4 implementation). These might be used for testing when developing a new mode.
+* **5:** Config: Standard set of messages and rate configuration for a fast link (e.g. USB).
+* **7:** Minimal: Minimal set of messages for use with a GCS connected on a high latency link.
+* **8:** External Vision
+
+**Reboot required:** True
+
+## MavLink DATA gathered
 
  - Altitude (10 Hz)
    - `altitude_monotic`
@@ -85,32 +117,3 @@ This system is capable of collecting telemetry data from a Pixhawk, save them on
    - `clipping_0`
    - `clipping_1`
    - `clipping_2`
-
-### Hardware
-
-This code is ment to be used with an Arduino MKR ZERO (ATSAMD21) with a cube orange pixhawk connected to hardware serial 1 and an SDCARD plugged in the Arduino's slot. 
-
-
-
-You could configure with messages or group of messages you want to send within the MAVLink menu of QGC:
-* [MAV_1_CONFIG](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_CONFIG) = `TELEM 2`
-* [MAV_1_MODE](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_MODE) = `Normal`
-* [MAV_1_RATE](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_RATE)= `92160` baud (Should be SER_TEL2_BAUD / 10) ie. `SER_TEL2_BAUD = 921600` bps
-* [MAV_1_FORWARD](https://docs.px4.io/v1.9.0/en/advanced_config/parameter_reference.html#MAV_1_FORWARD) = `True`
-
-MAV_1_MODE could be change to change group of messages you want to send through TELEM2, in our case.
-
-**Comment:** The MAVLink Mode defines the set of streamed messages (for example the vehicle's attitude) and their sending rates.
-
-**Values:**
-
-* **0:** Normal: Standard set of messages for a GCS.
-* **1:** Custom: Nothing (in the default PX4 implementation). These might be used for testing when developing a new mode.
-* **2:** Onboard: Standard set of messages for a companion computer.
-* **3:** OSD: Standard set of messages for an OSD system.
-* **4:** Magic: Nothing (in the default PX4 implementation). These might be used for testing when developing a new mode.
-* **5:** Config: Standard set of messages and rate configuration for a fast link (e.g. USB).
-* **7:** Minimal: Minimal set of messages for use with a GCS connected on a high latency link.
-* **8:** External Vision
-
-**Reboot required:** True
