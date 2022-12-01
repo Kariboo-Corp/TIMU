@@ -34,6 +34,15 @@ MAV_1_MODE could be change to change group of messages you want to send through 
 
 **Reboot required:** True
 
+## Contribute
+
+Use Platform IO and clone this repository in your project directory :
+```bash
+git clone --recursive git@github.com:Kariboo-Corp/TIMU.git
+```
+
+Connect an MKR Zero to your PC and upload the code.
+
 ## MavLink DATA gathered
 
  - Altitude (10 Hz)
